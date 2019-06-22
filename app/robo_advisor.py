@@ -2,6 +2,7 @@
 
 import requests
 import json
+import datetime
 
 # utility function to convert float or integer to USD-formatted string (for printing)
 # 
@@ -55,16 +56,15 @@ recent_high = max(high_prices)
 recent_low = min(low_prices)
 
 # breakpoint()
-
-
-
+time_now = datetime.datetime.now()
+formatted_time_now = time_now.strftime("%Y-%m-%d %H:%M:%S")
 
 
 print("-------------------------")
 print("SELECTED SYMBOL: XYZ")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print("REQUEST AT: 2018-02-20 02:00pm") #TODO: Program the daytime module
+print(f"REQUEST AT: {formatted_time_now}") #TODO: Program the daytime module
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
