@@ -10,9 +10,18 @@ import datetime
 def to_usd(my_price):
     return "${0:,.2f}".format(my_price) #>12,000.71
 
+
 #
 # INFO REQUESTS
 #
+
+symbol = input("Please specify a stock symbol (e.g. AMZN) and press enter: ") # This works
+
+def get_response(symbol):
+    request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={API_KEY}"
+    response = requests.get(request_url)
+    parsed_response = json.loads(response.text)
+    return parsed_response # Not sure about this symbol code
 
 request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo"
 
@@ -61,7 +70,7 @@ formatted_time_now = time_now.strftime("%Y-%m-%d %H:%M:%S")
 
 
 print("-------------------------")
-print("SELECTED SYMBOL: XYZ")
+print(f"SYMBOL: {symbol}")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
 print(f"REQUEST AT: {formatted_time_now}") #TODO: Program the daytime module
