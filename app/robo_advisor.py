@@ -36,6 +36,18 @@ latest_day = dates[0] # "2019-02-20" TODO: Sort this so that the lastest day is 
 
 latest_close = tsd[latest_day]["4. close"]
 
+# get high price for each day
+# high_prices = [10, 30, 20, 5]
+
+high_prices = []
+
+for date in dates:
+    high_price = tsd[date]["2. high"]
+    high_prices.append(float(high_price))
+
+# maximum of all the high prices
+recent_high = max(high_prices)
+
 
 # breakpoint()
 
@@ -51,8 +63,8 @@ print("REQUEST AT: 2018-02-20 02:00pm") #TODO: Program the daytime module
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {to_usd(float(latest_close))}")
-print("RECENT HIGH: $101,000.00")
-print("RECENT LOW: $99,000.00")
+print(F"RECENT HIGH: {to_usd(float(recent_high))}")
+print("RECENT LOW: $999.99")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
