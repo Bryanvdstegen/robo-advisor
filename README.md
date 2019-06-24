@@ -14,6 +14,8 @@ The source code excludes secret API Key value.
 
 # Information Input
 The system prompts the user to input **one** stock symbol (e.g. "MSFT", "AAPL", etc.).
+Code fails if stock does not match.
+"There was an error. Please make sure your ticker symbol is correct."
 
 # Validation Requirements
 Prevents an HTTP request if stock symbol not likely to be valid (e.g. symbol of "8888")
