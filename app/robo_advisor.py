@@ -7,6 +7,9 @@ import os
 import requests
 import datetime
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # utility function to convert float or integer to USD-formatted string (for printing)
 # 
 
@@ -18,15 +21,17 @@ def to_usd(my_price):
 # INFO REQUESTS
 #
 
+api_key = os.environ.get("ALPHAVANTAGE_API_KEY") #"demo"
+print(api_key)
 symbol = input("Please specify a stock symbol (e.g. AMZN) and press enter: ") # This works
 
 # def get_response(symbol):
-#     request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={API_KEY}"
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={api_key}"
 #     response = requests.get(request_url)
 #     parsed_response = json.loads(response.text)
 #     return parsed_response # Not sure about this symbol code
 
-request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo" # API = ALPHAVANTAGE_API_KEY="LJK9HOM2QV3DGSJP"
+# request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo" # API = ALPHAVANTAGE_API_KEY="LJK9HOM2QV3DGSJP"
 
 response = requests.get(request_url)
 # print(type(response)) #> class 'requests.models.Response'>
