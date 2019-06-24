@@ -1,7 +1,10 @@
 # app/robo_advisor.py
 
-import requests
+import csv
 import json
+import os
+
+import requests
 import datetime
 
 # utility function to convert float or integer to USD-formatted string (for printing)
@@ -17,11 +20,11 @@ def to_usd(my_price):
 
 symbol = input("Please specify a stock symbol (e.g. AMZN) and press enter: ") # This works
 
-def get_response(symbol):
-    request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={API_KEY}"
-    response = requests.get(request_url)
-    parsed_response = json.loads(response.text)
-    return parsed_response # Not sure about this symbol code
+# def get_response(symbol):
+#     request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={symbol}&apikey={API_KEY}"
+#     response = requests.get(request_url)
+#     parsed_response = json.loads(response.text)
+#     return parsed_response # Not sure about this symbol code
 
 request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo"
 
@@ -68,6 +71,21 @@ recent_low = min(low_prices)
 time_now = datetime.datetime.now()
 formatted_time_now = time_now.strftime("%Y-%m-%d %H:%M:%S")
 
+#
+#
+
+# csv-mgmt/write_teams.py
+
+# csv_file_path = "data/prices.csv" # a relative filepath
+csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
+
+with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writing"
+    writer = csv.DictWriter(csv_file, fieldnames=["city", "name"])
+    writer.writeheader() # uses fieldnames set above
+    writer.writerow({"city": "New York", "name": "Yankees"})
+    writer.writerow({"city": "New York", "name": "Mets"})
+    writer.writerow({"city": "Boston", "name": "Red Sox"})
+    writer.writerow({"city": "New Haven", "name": "Ravens"})
 
 print("-------------------------")
 print(f"SYMBOL: {symbol}")
@@ -83,5 +101,9 @@ print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
+print(f"WRITING DATA TO CSV: {csv_file_path}...")
+print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
+
+
