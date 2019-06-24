@@ -1,29 +1,24 @@
 # "Robo Advisor" Project
 
 
-#Prerequisites
+# Prerequisites
 
     + Anacoda 3.7
     + Python 3.7
     + Pip
 
-# Installation
-
-
 # Security
-Your project repository should contain a file called ".gitignore" which prevents the ".env" file and its secret credentials from being tracked in version control.
+Repository should contain a file called ".gitignore" which prevents the ".env" file and its secret credentials from being tracked in version control.
 
-The source code excludes secret API Key value
+The source code excludes secret API Key value.
 
-# Functionality Requirements
+# Information Input
+The system prompts the user to input **one** stock symbol (e.g. "MSFT", "AAPL", etc.).
 
-Information Input Requirements
-The system should prompt the user to input one or more stock symbols (e.g. "MSFT", "AAPL", etc.).
+# Validation Requirements
+Prevents an HTTP request if stock symbol not likely to be valid (e.g. symbol of "8888")
 
-Validation Requirements
-
-# Calculations
-
+Fails gracefully if encountering a response error (e.g. symbol of "OOPS")
 
 # Information Output Requirements
 Historical prices are written to a CSV file, file path indicated on output

@@ -16,11 +16,13 @@ load_dotenv()
 def to_usd(my_price):
     return "${0:,.2f}".format(my_price) #>12,000.71
 
+
 #
 # INFO REQUESTS
 #
 
 api_key = os.environ.get("ALPHAVANTAGE_API_KEY") #"demo"
+print(api_key)
 symbol = input("Please specify a stock symbol (e.g. AMZN) and press enter: ") # This works
 
 # def get_response(symbol):
@@ -32,10 +34,17 @@ request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&sym
 # request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=demo" # API = ALPHAVANTAGE_API_KEY="LJK9HOM2QV3DGSJP"
 
 response = requests.get(request_url)
+# print(type(response)) #> class 'requests.models.Response'>
+# print(response.status_code) #> 200
+# print(response.text) # dictionary, string
+
+# quit()
 
 parsed_response = json.loads(response.text)
 
 last_refreshed = parsed_response["Meta Data"]["3. Last Refreshed"]
+
+# breakpoint()
 
 tsd = parsed_response["Time Series (Daily)"]
 
@@ -70,6 +79,7 @@ formatted_time_now = time_now.strftime("%Y-%m-%d %H:%M:%S")
 #
 #
 
+# csv-mgmt/write_teams.py
 
 # csv_file_path = "data/prices.csv" # a relative filepath
 csv_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "prices.csv")
@@ -91,6 +101,8 @@ with open(csv_file_path, "w") as csv_file: # "w" means "open the file for writin
         })
 
 
+
+        
 
 print("-------------------------")
 print(f"SYMBOL: {symbol}")
